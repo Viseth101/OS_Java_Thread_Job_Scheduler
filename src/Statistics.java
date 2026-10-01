@@ -37,6 +37,10 @@ public class Statistics {
 		return average(totalWaitingTime.get(), completedJobsCount.get());
 	}
 
+	public int getCompletedJobsCount() {
+		return completedJobsCount.get();
+	}
+
 	public long getAvgTurnaroundTime() {
 		return average(totalTurnaroundTime.get(), completedJobsCount.get());
 	}

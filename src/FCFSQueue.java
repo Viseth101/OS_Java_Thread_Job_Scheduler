@@ -9,6 +9,7 @@ public class FCFSQueue implements ReadyQueue {
 		try {
 			queue.put(job);
 		} catch (InterruptedException exception) {
+			queue.add(job);
 			Thread.currentThread().interrupt();
 		}
 	}
@@ -16,5 +17,10 @@ public class FCFSQueue implements ReadyQueue {
 	@Override
 	public Job takeNextJob() throws InterruptedException {
 		return queue.take();
+	}
+
+	@Override
+	public int size() {
+		return queue.size();
 	}
 }

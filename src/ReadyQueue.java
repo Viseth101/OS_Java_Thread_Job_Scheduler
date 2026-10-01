@@ -3,4 +3,6 @@ public interface ReadyQueue {
 	void addJob(Job job);
 
 	Job takeNextJob() throws InterruptedException;
+
+	int size();
 }

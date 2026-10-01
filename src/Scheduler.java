@@ -5,6 +5,7 @@ public class Scheduler extends Thread {
 	private final BlockingQueue<Job> arrivalQueue;
 	private final ReadyQueue readyQueue;
 	private volatile boolean running = true;
+	private volatile int shutdownWorkerCount;
 
 	public Scheduler(BlockingQueue<Job> arrivalQueue, ReadyQueue readyQueue) {
 		super("Scheduler");
@@ -14,18 +15,31 @@ public class Scheduler extends Thread {
 
 	@Override
 	public void run() {
-		while (running) {
+		while (true) {
+			Job job;
 			try {
-				Job job = arrivalQueue.take();
-				job.setState(JobState.READY);
-				ProjectLogger.log("Scheduler", job.getId(), "READY", "");
-				readyQueue.addJob(job);
+				if (running) {
+					job = arrivalQueue.take();
+				} else {
+					job = arrivalQueue.poll();
+					if (job == null) {
+						return;
+					}
+				}
 			} catch (InterruptedException exception) {
 				if (running) {
 					Thread.currentThread().interrupt();
+					return;
 				}
-				return;
+				continue;
 			}
+
+			if (!running) {
+				Thread.interrupted();
+			}
+			job.setState(JobState.READY);
+			ProjectLogger.log("Scheduler", job.getId(), "READY", "");
+			readyQueue.addJob(job);
 		}
 	}
 
@@ -36,9 +50,20 @@ public class Scheduler extends Thread {
 		}
 
 		running = false;
-		for (int index = 0; index < Math.max(0, workerCount); index++) {
+		shutdownWorkerCount = Math.max(0, workerCount);
+		interrupt();
+
+		try {
+			join();
+			enqueueShutdownSignals();
+		} catch (InterruptedException exception) {
+			Thread.currentThread().interrupt();
+		}
+	}
+
+	private void enqueueShutdownSignals() {
+		for (int index = 0; index < shutdownWorkerCount; index++) {
 			readyQueue.addJob(Job.createPoisonPill());
 		}
-		interrupt();
 	}
 }

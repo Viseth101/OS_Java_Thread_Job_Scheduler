@@ -18,4 +18,9 @@ public class PriorityQueueImpl implements ReadyQueue {
 	public Job takeNextJob() throws InterruptedException {
 		return queue.take();
 	}
+
+	@Override
+	public int size() {
+		return queue.size();
+	}
 }
