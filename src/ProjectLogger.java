@@ -1,19 +1,24 @@
-/** Thread-safe console logger for scheduler events. */
+/**
+ * Thread-safe console logger for scheduler events and summaries.
+ *
+ * <p>Generator, scheduler, workers, monitor, and statistics all write through
+ * this class. Synchronizing each output method prevents messages from multiple
+ * OS threads interleaving on the console.</p>
+ */
 public final class ProjectLogger {
 	private static long simulationStartTime;
 
 	private ProjectLogger() {
-		// Utility class.
+		// Utility class: all callers share one simulation clock and output stream.
 	}
 
-	/** Starts a new simulation clock. */
+	/** Starts a new simulation clock used for relative event timestamps. */
 	public static synchronized void init() {
 		simulationStartTime = System.currentTimeMillis();
 	}
 
-	/** Logs a structured scheduler event with elapsed milliseconds. */
-	public static synchronized void log(String actor, String jobId,
-			String action, String extra) {
+	/** Logs one structured event with elapsed milliseconds and actor/job context. */
+	public static synchronized void log(String actor, String jobId, String action, String extra) {
 		long elapsedMs = System.currentTimeMillis() - simulationStartTime;
 		StringBuilder message = new StringBuilder()
 				.append('[')
@@ -29,10 +34,11 @@ public final class ProjectLogger {
 			message.append(' ').append(extra);
 		}
 
+		// The synchronized method makes this entire line one console operation.
 		System.out.println(message);
 	}
 
-	/** Writes an already-formatted message without adding scheduler metadata. */
+	/** Writes an already-formatted monitor or summary message without extra metadata. */
 	public static synchronized void logRaw(String message) {
 		System.out.println(message == null ? "null" : message);
 	}

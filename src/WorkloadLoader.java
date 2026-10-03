@@ -5,18 +5,25 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Loads scheduler jobs from the project's simple CSV workload format. */
+/**
+ * Loads the external workload description into the scheduler's in-memory jobs.
+ *
+ * <p>This is the pipeline entry point: it reads CSV data, converts each row to
+ * a {@link Job}, and leaves timing and scheduling to {@link JobGenerator} and
+ * {@link Scheduler}.</p>
+ */
 public final class WorkloadLoader {
 	private static final int EXPECTED_COLUMN_COUNT = 6;
 
 	private WorkloadLoader() {
-		// Utility class.
+		// Utility class: instances would not represent an OS component.
 	}
 
 	/** Reads all jobs from a CSV file, excluding its header row. */
 	public static List<Job> loadJobs(String filePath) throws IOException {
 		List<Job> jobs = new ArrayList<>();
 
+		// try-with-resources closes the workload file even when parsing fails.
 		try (BufferedReader reader = Files.newBufferedReader(Path.of(filePath))) {
 			reader.readLine();
 

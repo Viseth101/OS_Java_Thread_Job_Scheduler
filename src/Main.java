@@ -4,12 +4,19 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/** Application entry point for the mini scheduler simulation. */
+/**
+ * Application controller for the complete mini scheduler simulation.
+ *
+ * <p>{@code Main} wires the pipeline together: it loads jobs, chooses FCFS or
+ * priority dispatch, starts generator/scheduler/worker/monitor threads, then
+ * joins them in a controlled order before printing statistics.</p>
+ */
 public class Main {
 	private static final String USAGE =
 			"Usage: java Main <workload.csv> <fcfs|priority> <workers> <printerPermits> <databasePermits>";
 
 	public static void main(String[] args) {
+		// The five arguments define the workload and the simulation's scheduling/resource policy.
 		if (args.length != 5) {
 			System.out.println(USAGE);
 			System.exit(1);
@@ -26,10 +33,12 @@ public class Main {
 				throw new IllegalArgumentException("worker count must be positive and permit counts cannot be negative");
 			}
 
+			// Initialize shared services before any background thread can emit an event.
 			ProjectLogger.init();
 			List<Job> jobs = WorkloadLoader.loadJobs(workloadFile);
 			ResourceManager resourceManager = new ResourceManager(printerPermits, dbPermits);
 			Statistics statistics = new Statistics();
+			// arrivalQueue is time-based; readyQueue is policy-based and feeds workers.
 			ReadyQueue readyQueue = policy.equals("priority")
 					? new PriorityQueueImpl()
 					: new FCFSQueue();
@@ -44,6 +53,7 @@ public class Main {
 			}
 
 			long simulationStartTime = System.currentTimeMillis();
+			// Start observers and consumers before the producer so no arrival is left unhandled.
 			monitor.start();
 			scheduler.start();
 			for (Worker worker : workers) {
@@ -51,12 +61,16 @@ public class Main {
 			}
 			generator.start();
 
+			// Generator completion means no future arrivals will be added.
 			generator.join();
+			// Scheduler shutdown drains existing arrivals, then publishes worker poison pills.
 			scheduler.shutdown(workerCount);
 			scheduler.join();
+			// Workers finish real jobs before consuming their individual poison pills.
 			for (Worker worker : workers) {
 				worker.join();
 			}
+			// Stop the observer after workers finish so the final summary is stable.
 			monitor.shutdown();
 			monitor.join();
 

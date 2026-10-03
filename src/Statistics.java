@@ -2,16 +2,26 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-/** Thread-safe aggregate metrics for completed jobs. */
+/**
+ * Thread-safe aggregate metrics for completed jobs.
+ *
+ * <p>Many worker threads finish jobs concurrently. {@link AtomicLong} and
+ * {@link AtomicInteger} update counters without a shared lock, while
+ * {@link ConcurrentHashMap} safely stores completed jobs for concurrent writes
+ * and future inspection.</p>
+ */
 public class Statistics {
+	// Atomic values prevent lost updates when several workers finish together.
+	// prevent race condition same as using a mutual lock, but more efficient for simple counters and sums.
 	private final AtomicInteger completedJobsCount = new AtomicInteger();
 	private final AtomicLong totalWaitingTime = new AtomicLong();
 	private final AtomicLong totalTurnaroundTime = new AtomicLong();
 	private final AtomicLong totalResourceWaitTime = new AtomicLong();
 	private final AtomicInteger resourceJobCount = new AtomicInteger();
+	// The concurrent map allows completion records to be published safely across workers.
 	private final ConcurrentHashMap<String, Job> completedJobs = new ConcurrentHashMap<>();
 
-	/** Records one completed job and updates all applicable aggregates. */
+	/** Records one completed job and updates all applicable aggregates atomically per metric. */
 	public void recordJobCompletion(Job job) {
 		if (job == null) {
 			throw new IllegalArgumentException("job must not be null");
@@ -34,6 +44,7 @@ public class Statistics {
 	}
 
 	public long getAvgWaitingTime() {
+		// Integer division intentionally reports whole milliseconds for the walkthrough summary.
 		return average(totalWaitingTime.get(), completedJobsCount.get());
 	}
 
@@ -50,13 +61,14 @@ public class Statistics {
 	}
 
 	public double getThroughput(long simulationTimeMs) {
+		// Throughput is completed jobs divided by elapsed seconds, with zero-duration protection.
 		if (simulationTimeMs <= 0L) {
 			return 0.0;
 		}
 		return completedJobsCount.get() / (simulationTimeMs / 1000.0);
 	}
 
-	/** Prints the final aggregate metrics as one readable table. */
+	/** Prints the final aggregate metrics as one readable table for the controller. */
 	public void printSummary(long totalSimulationDurationMs) {
 		ProjectLogger.logRaw("=== Simulation Summary ===");
 		ProjectLogger.logRaw("| Metric                    | Value       |");
