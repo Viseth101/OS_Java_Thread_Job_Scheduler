@@ -1,18 +1,38 @@
-## Getting Started
+# Mini Job Scheduler & Shared Resource Manager
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Compilation
 
-## Folder Structure
+Compile all Java source files into the `bin/` directory:
 
-The workspace contains two folders by default, where:
+```bash
+javac src/*.java -d bin/
+```
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Execution
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+```bash
+java -cp bin Main <workload.csv> <fcfs|priority> <workers> <printerPermits> <databasePermits>
+```
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Arguments:
 
-## Dependency Management
+- `workload.csv`: workload file containing job arrival, priority, CPU-work, and resource data.
+- `fcfs|priority`: ready-queue policy: first-come, first-served or priority scheduling.
+- `workers`: number of worker threads executing jobs concurrently.
+- `printerPermits`: number of simultaneous printer-resource permits.
+- `databasePermits`: number of simultaneous database-resource permits.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Example:
+
+```bash
+java -cp bin Main Workloads/jobs_standard.csv priority 3 1 2
+```
+
+## Architecture Notes
+
+- The scheduler uses non-preemptive execution: once a worker starts a job, it runs the simulated CPU burst until completion or resource blocking.
+- `Thread.sleep()` simulates CPU bursts and resource-use durations without consuming real CPU time.
+- Priority scheduling orders lower numeric priorities first; equal priorities are resolved deterministically with each job's sequence number.
+- Shared printer and database access is controlled by fair semaphores.
+- The generator sends jobs through a time-based arrival queue, while the scheduler transfers them to a policy-based ready queue.
+- Workers terminate safely through a Poison Pill mechanism. The scheduler drains real jobs before inserting one sentinel per worker, avoiding busy-waiting and abrupt thread termination.

@@ -22,12 +22,15 @@ public class JobGenerator extends Thread {
 	@Override
 	public void run() {
 		long previousArrivalMs = 0L;
+		int nextSequenceNumber = 0;
 
 		for (Job job : jobs) {
 			// Relative sleeps reproduce the absolute arrival times from the CSV workload.
 			long waitTime = Math.max(0L, job.getArrivalMs() - previousArrivalMs);
 			try {
 				Thread.sleep(waitTime);
+				// Preserve workload order so equal-priority jobs have a deterministic tie-break.
+				job.setSequenceNumber(nextSequenceNumber++);
 				job.setActualArrivalTime(System.currentTimeMillis());
 				job.setState(JobState.ARRIVED);
 				ProjectLogger.log("JobGenerator", job.getId(), "ARRIVE", "");

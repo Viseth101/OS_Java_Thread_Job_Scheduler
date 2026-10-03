@@ -1,57 +1,57 @@
-[0018 ms] [JobGenerator] P01 ARRIVE
-[0027 ms] [Scheduler] P01 READY
-[0027 ms] [Worker-1] P01 START
-[0128 ms] [JobGenerator] P02 ARRIVE
-[0128 ms] [Scheduler] P02 READY
-[0128 ms] [Worker-2] P02 START
-[0229 ms] [JobGenerator] P03 ARRIVE
-[0229 ms] [Scheduler] P03 READY
-[0229 ms] [Worker-3] P03 START
-[0278 ms] [Worker-1] P01 WAIT PRINTER
-[0278 ms] [Worker-1] P01 ACQUIRE PRINTER
-[0330 ms] [JobGenerator] P04 ARRIVE
-[0330 ms] [Scheduler] P04 READY
-[0429 ms] [Worker-2] P02 WAIT PRINTER
-[0431 ms] [JobGenerator] P05 ARRIVE
-[0431 ms] [Scheduler] P05 READY
-[0481 ms] [Worker-3] P03 WAIT PRINTER
-[0531 ms] [JobGenerator] P06 ARRIVE
-[0531 ms] [Scheduler] P06 READY
+[0026 ms] [JobGenerator] P01 ARRIVE
+[0034 ms] [Scheduler] P01 READY
+[0034 ms] [Worker-1] P01 START
+[0135 ms] [JobGenerator] P02 ARRIVE
+[0135 ms] [Scheduler] P02 READY
+[0135 ms] [Worker-2] P02 START
+[0236 ms] [JobGenerator] P03 ARRIVE
+[0236 ms] [Scheduler] P03 READY
+[0236 ms] [Worker-3] P03 START
+[0285 ms] [Worker-1] P01 WAIT PRINTER
+[0285 ms] [Worker-1] P01 ACQUIRE PRINTER
+[0337 ms] [JobGenerator] P04 ARRIVE
+[0337 ms] [Scheduler] P04 READY
+[0437 ms] [Worker-2] P02 WAIT PRINTER
+[0439 ms] [JobGenerator] P05 ARRIVE
+[0439 ms] [Scheduler] P05 READY
+[0487 ms] [Worker-3] P03 WAIT PRINTER
+[0539 ms] [JobGenerator] P06 ARRIVE
+[0539 ms] [Scheduler] P06 READY
 [MONITOR] Ready: 6 | Completed: 0 | Printer Permits: 0 | DB Permits: 2
-[1479 ms] [Worker-1] P01 RELEASE PRINTER
-[1479 ms] [Worker-2] P02 ACQUIRE PRINTER
-[1479 ms] [Worker-1] P01 COMPLETE
-[1479 ms] [Worker-1] P05 START
-[1731 ms] [Worker-1] P05 WAIT PRINTER
+[1487 ms] [Worker-1] P01 RELEASE PRINTER
+[1487 ms] [Worker-2] P02 ACQUIRE PRINTER
+[1487 ms] [Worker-1] P01 COMPLETE
+[1487 ms] [Worker-1] P05 START
+[1738 ms] [Worker-1] P05 WAIT PRINTER
 [MONITOR] Ready: 5 | Completed: 1 | Printer Permits: 0 | DB Permits: 2
-[2680 ms] [Worker-2] P02 RELEASE PRINTER
-[2680 ms] [Worker-2] P02 COMPLETE
-[2680 ms] [Worker-3] P03 ACQUIRE PRINTER
-[2680 ms] [Worker-2] P04 START
-[2981 ms] [Worker-2] P04 WAIT PRINTER
+[2687 ms] [Worker-2] P02 RELEASE PRINTER
+[2687 ms] [Worker-2] P02 COMPLETE
+[2687 ms] [Worker-3] P03 ACQUIRE PRINTER
+[2687 ms] [Worker-2] P04 START
+[2989 ms] [Worker-2] P04 WAIT PRINTER
 [MONITOR] Ready: 4 | Completed: 2 | Printer Permits: 0 | DB Permits: 2
-[3881 ms] [Worker-3] P03 RELEASE PRINTER
-[3881 ms] [Worker-3] P03 COMPLETE
-[3881 ms] [Worker-1] P05 ACQUIRE PRINTER
-[3881 ms] [Worker-3] P06 START
+[3888 ms] [Worker-3] P03 RELEASE PRINTER
+[3888 ms] [Worker-3] P03 COMPLETE
+[3889 ms] [Worker-1] P05 ACQUIRE PRINTER
+[3889 ms] [Worker-3] P06 START
 [MONITOR] Ready: 3 | Completed: 3 | Printer Permits: 0 | DB Permits: 2
-[4184 ms] [Worker-3] P06 WAIT PRINTER
+[4190 ms] [Worker-3] P06 WAIT PRINTER
 [MONITOR] Ready: 3 | Completed: 3 | Printer Permits: 0 | DB Permits: 2
-[5082 ms] [Worker-1] P05 RELEASE PRINTER
-[5082 ms] [Worker-1] P05 COMPLETE
-[5082 ms] [Worker-2] P04 ACQUIRE PRINTER
+[5090 ms] [Worker-1] P05 RELEASE PRINTER
+[5090 ms] [Worker-1] P05 COMPLETE
+[5090 ms] [Worker-2] P04 ACQUIRE PRINTER
 [MONITOR] Ready: 2 | Completed: 4 | Printer Permits: 0 | DB Permits: 2
-[6283 ms] [Worker-2] P04 RELEASE PRINTER
-[6283 ms] [Worker-2] P04 COMPLETE
-[6283 ms] [Worker-3] P06 ACQUIRE PRINTER
+[6291 ms] [Worker-2] P04 RELEASE PRINTER
+[6291 ms] [Worker-2] P04 COMPLETE
+[6291 ms] [Worker-3] P06 ACQUIRE PRINTER
 [MONITOR] Ready: 1 | Completed: 5 | Printer Permits: 0 | DB Permits: 2
-[7484 ms] [Worker-3] P06 RELEASE PRINTER
-[7484 ms] [Worker-3] P06 COMPLETE
+[7492 ms] [Worker-3] P06 RELEASE PRINTER
+[7492 ms] [Worker-3] P06 COMPLETE
 === Simulation Summary ===
 | Metric                    | Value       |
 | Completed jobs            |           6 |
 | Average waiting time (ms) |        1126 |
 | Average turnaround (ms)   |        4203 |
-| Average resource wait (ms)|        1599 |
+| Average resource wait (ms)|        1600 |
 | Throughput (jobs/sec)     |       0.804 |
 ===========================

@@ -1,78 +1,78 @@
-[0019 ms] [JobGenerator] J01 ARRIVE
-[0027 ms] [Scheduler] J01 READY
-[0027 ms] [Worker-1] J01 START
-[0128 ms] [JobGenerator] J02 ARRIVE
-[0128 ms] [Scheduler] J02 READY
-[0128 ms] [Worker-2] J02 START
-[0230 ms] [JobGenerator] J03 ARRIVE
-[0230 ms] [Scheduler] J03 READY
-[0230 ms] [Worker-3] J03 START
-[0330 ms] [JobGenerator] J04 ARRIVE
-[0330 ms] [Scheduler] J04 READY
-[0431 ms] [JobGenerator] J05 ARRIVE
-[0432 ms] [Scheduler] J05 READY
-[0534 ms] [JobGenerator] J06 ARRIVE
-[0534 ms] [Scheduler] J06 READY
+[0029 ms] [JobGenerator] J01 ARRIVE
+[0036 ms] [Scheduler] J01 READY
+[0036 ms] [Worker-3] J01 START
+[0137 ms] [JobGenerator] J02 ARRIVE
+[0137 ms] [Scheduler] J02 READY
+[0137 ms] [Worker-2] J02 START
+[0238 ms] [JobGenerator] J03 ARRIVE
+[0238 ms] [Scheduler] J03 READY
+[0238 ms] [Worker-1] J03 START
+[0339 ms] [JobGenerator] J04 ARRIVE
+[0339 ms] [Scheduler] J04 READY
+[0441 ms] [JobGenerator] J05 ARRIVE
+[0441 ms] [Scheduler] J05 READY
+[0542 ms] [JobGenerator] J06 ARRIVE
+[0542 ms] [Scheduler] J06 READY
 [MONITOR] Ready: 3 | Completed: 0 | Printer Permits: 1 | DB Permits: 2
-[1035 ms] [JobGenerator] J07 ARRIVE
-[1035 ms] [Scheduler] J07 READY
-[1235 ms] [JobGenerator] J08 ARRIVE
-[1235 ms] [Scheduler] J08 READY
-[1438 ms] [JobGenerator] J09 ARRIVE
-[1438 ms] [Scheduler] J09 READY
-[1638 ms] [JobGenerator] J10 ARRIVE
-[1638 ms] [Scheduler] J10 READY
+[1042 ms] [JobGenerator] J07 ARRIVE
+[1042 ms] [Scheduler] J07 READY
+[1243 ms] [JobGenerator] J08 ARRIVE
+[1243 ms] [Scheduler] J08 READY
+[1443 ms] [JobGenerator] J09 ARRIVE
+[1443 ms] [Scheduler] J09 READY
+[1644 ms] [JobGenerator] J10 ARRIVE
+[1644 ms] [Scheduler] J10 READY
 [MONITOR] Ready: 10 | Completed: 0 | Printer Permits: 1 | DB Permits: 2
-[2528 ms] [Worker-1] J01 COMPLETE
-[2528 ms] [Worker-1] J07 START
-[2531 ms] [Worker-2] J02 WAIT PRINTER
-[2531 ms] [Worker-2] J02 ACQUIRE PRINTER
-[2731 ms] [Worker-3] J03 COMPLETE
-[2731 ms] [Worker-3] J08 START
+[2537 ms] [Worker-3] J01 COMPLETE
+[2537 ms] [Worker-3] J07 START
+[2539 ms] [Worker-2] J02 WAIT PRINTER
+[2539 ms] [Worker-2] J02 ACQUIRE PRINTER
+[2739 ms] [Worker-1] J03 COMPLETE
+[2739 ms] [Worker-1] J08 START
 [MONITOR] Ready: 8 | Completed: 2 | Printer Permits: 0 | DB Permits: 2
-[3229 ms] [Worker-1] J07 WAIT PRINTER
-[3332 ms] [Worker-3] J08 WAIT PRINTER
-[3733 ms] [Worker-2] J02 RELEASE PRINTER
-[3733 ms] [Worker-2] J02 COMPLETE
-[3733 ms] [Worker-1] J07 ACQUIRE PRINTER
-[3733 ms] [Worker-2] J09 START
+[3240 ms] [Worker-3] J07 WAIT PRINTER
+[3340 ms] [Worker-1] J08 WAIT PRINTER
+[3740 ms] [Worker-2] J02 RELEASE PRINTER
+[3740 ms] [Worker-2] J02 COMPLETE
+[3740 ms] [Worker-3] J07 ACQUIRE PRINTER
+[3740 ms] [Worker-2] J09 START
 [MONITOR] Ready: 7 | Completed: 3 | Printer Permits: 0 | DB Permits: 2
-[4434 ms] [Worker-2] J09 WAIT DATABASE
-[4434 ms] [Worker-2] J09 ACQUIRE DATABASE
-[4634 ms] [Worker-1] J07 RELEASE PRINTER
-[4634 ms] [Worker-1] J07 COMPLETE
-[4634 ms] [Worker-3] J08 ACQUIRE PRINTER
-[4634 ms] [Worker-1] J10 START
+[4443 ms] [Worker-2] J09 WAIT DATABASE
+[4443 ms] [Worker-2] J09 ACQUIRE DATABASE
+[4641 ms] [Worker-3] J07 RELEASE PRINTER
+[4641 ms] [Worker-3] J07 COMPLETE
+[4641 ms] [Worker-1] J08 ACQUIRE PRINTER
+[4641 ms] [Worker-3] J10 START
 [MONITOR] Ready: 6 | Completed: 4 | Printer Permits: 0 | DB Permits: 1
-[5235 ms] [Worker-1] J10 COMPLETE
-[5235 ms] [Worker-1] J06 START
-[5336 ms] [Worker-2] J09 RELEASE DATABASE
-[5336 ms] [Worker-2] J09 COMPLETE
-[5336 ms] [Worker-2] J05 START
-[5534 ms] [Worker-3] J08 RELEASE PRINTER
-[5534 ms] [Worker-3] J08 COMPLETE
-[5534 ms] [Worker-3] J04 START
+[5242 ms] [Worker-3] J10 COMPLETE
+[5242 ms] [Worker-3] J06 START
+[5344 ms] [Worker-2] J09 RELEASE DATABASE
+[5344 ms] [Worker-2] J09 COMPLETE
+[5344 ms] [Worker-2] J05 START
+[5543 ms] [Worker-1] J08 RELEASE PRINTER
+[5543 ms] [Worker-1] J08 COMPLETE
+[5543 ms] [Worker-1] J04 START
 [MONITOR] Ready: 3 | Completed: 7 | Printer Permits: 1 | DB Permits: 2
 [MONITOR] Ready: 3 | Completed: 7 | Printer Permits: 1 | DB Permits: 2
-[7636 ms] [Worker-1] J06 WAIT DATABASE
-[7636 ms] [Worker-1] J06 ACQUIRE DATABASE
-[7837 ms] [Worker-2] J05 WAIT PRINTER
-[7837 ms] [Worker-2] J05 ACQUIRE PRINTER
-[7937 ms] [Worker-3] J04 WAIT DATABASE
-[7937 ms] [Worker-3] J04 ACQUIRE DATABASE
+[7643 ms] [Worker-3] J06 WAIT DATABASE
+[7643 ms] [Worker-3] J06 ACQUIRE DATABASE
+[7844 ms] [Worker-2] J05 WAIT PRINTER
+[7844 ms] [Worker-2] J05 ACQUIRE PRINTER
+[7944 ms] [Worker-1] J04 WAIT DATABASE
+[7944 ms] [Worker-1] J04 ACQUIRE DATABASE
 [MONITOR] Ready: 3 | Completed: 7 | Printer Permits: 0 | DB Permits: 0
-[8638 ms] [Worker-1] J06 RELEASE DATABASE
-[8638 ms] [Worker-1] J06 COMPLETE
-[8938 ms] [Worker-3] J04 RELEASE DATABASE
-[8938 ms] [Worker-3] J04 COMPLETE
+[8644 ms] [Worker-3] J06 RELEASE DATABASE
+[8645 ms] [Worker-3] J06 COMPLETE
+[8944 ms] [Worker-1] J04 RELEASE DATABASE
+[8944 ms] [Worker-1] J04 COMPLETE
 [MONITOR] Ready: 1 | Completed: 9 | Printer Permits: 0 | DB Permits: 2
-[9039 ms] [Worker-2] J05 RELEASE PRINTER
-[9039 ms] [Worker-2] J05 COMPLETE
+[9045 ms] [Worker-2] J05 RELEASE PRINTER
+[9045 ms] [Worker-2] J05 COMPLETE
 === Simulation Summary ===
 | Metric                    | Value       |
 | Completed jobs            |          10 |
 | Average waiting time (ms) |        2309 |
 | Average turnaround (ms)   |        4932 |
-| Average resource wait (ms)|         258 |
+| Average resource wait (ms)|         257 |
 | Throughput (jobs/sec)     |       1.109 |
 ===========================
